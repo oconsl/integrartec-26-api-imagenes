@@ -1,0 +1,13 @@
+{
+  "name": "curso-app-miniaturas",
+  "version": "1.0.0",
+  "description": "Lambda que genera miniaturas cuando se sube una foto a S3",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "zip": "npm install --os=linux --cpu=x64 --omit=dev && zip -r miniaturas.zip index.mjs node_modules package.json"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
+  }
+}
