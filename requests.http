@@ -1,0 +1,32 @@
+# Requests de ejemplo (extensión REST Client de VS Code o similar).
+# En EC2 cambiá @base por http://<IP-pública-de-la-EC2>:3000
+@base = http://localhost:3000
+
+### ¿Llega a RDS y a S3?
+GET {{base}}/health
+
+### Registrar usuario
+POST {{base}}/usuarios
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@example.com", "password": "secreta123" }
+
+### Listar usuarios
+GET {{base}}/usuarios
+
+### Ver usuario (incluye foto_url firmada)
+GET {{base}}/usuarios/1
+
+### Subir foto de perfil → S3
+POST {{base}}/usuarios/1/foto
+Content-Type: multipart/form-data; boundary=limite
+
+--limite
+Content-Disposition: form-data; name="foto"; filename="avatar.jpg"
+Content-Type: image/jpeg
+
+< ./avatar.jpg
+--limite--
+
+### Ver la foto (redirige a la URL firmada de S3)
+GET {{base}}/usuarios/1/foto
